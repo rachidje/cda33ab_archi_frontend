@@ -7,6 +7,12 @@ export namespace GameModel {
         CREATED = 4
     }
 
+    export enum WeaponType {
+        MAIN_WEAPON = "WEAPON",
+        GADGET = "GADGET",
+        SKILL = "SKILL"
+    }
+
     export type Battlefield = {
         id: string
         title: string
@@ -18,6 +24,11 @@ export namespace GameModel {
         firstname: string
         lastname: string
         age: number
+        stuff: {
+            weapon: string | null
+            gadget: string | null
+            skill: string | null
+        } 
     }
 
     export type Form = {
