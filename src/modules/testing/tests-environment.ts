@@ -1,9 +1,13 @@
+import { ApiBattlefieldsGateway } from "../game/core/gateways/api.battlefields-gateway";
+import { InMemoryStuffsGateway } from "../game/core/gateways/in-memory.stuffs-gateway";
 import { Dependencies } from "../store/dependencies";
 import { AppState, createStore } from "../store/store";
 
 const createDependencies = (
     dependencies?: Partial<Dependencies>
 ): Dependencies => ({
+    battlefieldGateway: new ApiBattlefieldsGateway('http://localhost:3001'),
+    stuffsGateway: new InMemoryStuffsGateway(),
     ...dependencies,
 });
 

@@ -7,10 +7,19 @@ export namespace GameModel {
         CREATED = 4
     }
 
-    export enum WeaponType {
-        MAIN_WEAPON = "WEAPON",
+    export type StuffId = string;
+
+    export enum StuffType {
+        WEAPON = "WEAPON",
         GADGET = "GADGET",
         SKILL = "SKILL"
+    }
+
+    export type Stuff = {
+        id: string
+        title: string
+        type: StuffType
+        requiredRole: Role | null
     }
 
     export type Battlefield = {
@@ -19,15 +28,22 @@ export namespace GameModel {
         difficulty: number
     }
 
+    export enum Role {
+        ASSAUT = "ASSAUT", // En première ligne, offensif, rapide
+        SOUTIEN = "SOUTIEN",
+        ECLAIREUR = "ECLAIREUR"
+    }
+
     export type Player = {
         id: string
         firstname: string
         lastname: string
         age: number
+        role: Role | null
         stuff: {
-            weapon: string | null
-            gadget: string | null
-            skill: string | null
+            weapon: StuffId | null
+            gadget: StuffId | null
+            skill: StuffId | null
         } 
     }
 

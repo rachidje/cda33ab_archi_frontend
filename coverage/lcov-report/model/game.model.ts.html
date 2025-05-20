@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for game/core/store/game.slice.ts</title>
+    <title>Code coverage report for model/game.model.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../../prettify.css" />
-    <link rel="stylesheet" href="../../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../../sort-arrow-sprite.png);
+            background-image: url(../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">game/core/store</a> game.slice.ts</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">model</a> game.model.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>55/55</span>
+                <span class='fraction'>54/54</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>55/55</span>
+                <span class='fraction'>54/54</span>
             </div>
         
             
@@ -116,8 +116,7 @@
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -148,17 +147,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -171,77 +159,86 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { GameModel } from "../model/game.model"
-&nbsp;
-export type GameState = {
-    step: GameModel.Step
-    form: GameModel.Form
-    availableBattlefields: {
-        status: 'idle' | 'loading' | 'success' | 'error',
-        error?: string | null
-        data: GameModel.Battlefield[]
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">export namespace GameModel {
+    export enum Step {
+        PLAYERS = 0,
+        BATTEFIELD = 1,
+        WEAPONS = 2,
+        SUMMARY = 3,
+        CREATED = 4
     }
-}
 &nbsp;
-const initialState: GameState = {
-    step: GameModel.Step.PLAYERS,
-    form: {
-        players: [],
-        teamLeaderId: null,
-        battlefieldId: null
-    },
-    availableBattlefields: {
-        status: 'idle',
-        data: []
+    export type StuffId = string;
+&nbsp;
+    export enum StuffType {
+        WEAPON = "WEAPON",
+        GADGET = "GADGET",
+        SKILL = "SKILL"
     }
-}
 &nbsp;
-export const gameSlice = createSlice({
-    name: "game",
-    initialState,
-    reducers: {
-        setStep: (state, action: PayloadAction&lt;GameModel.Step&gt;) =&gt; {
-            state.step = action.payload
-        },
-        choosePlayers: (state, action: PayloadAction&lt;GameModel.Form&gt;) =&gt; {
-            state.form = action.payload;
-        },
-        handleLoadingBattlefields: (state) =&gt; {
-            state.availableBattlefields.status = 'loading'
-        },
-        handleFetchBattlefieldsError : (state, action: PayloadAction&lt;string&gt;) =&gt; {
-            state.availableBattlefields.status = 'error';
-            state.availableBattlefields.error = action.payload
-        },
-        storeBattlefields: (state, action: PayloadAction&lt;GameModel.Battlefield[]&gt;) =&gt; {
-            state.availableBattlefields.data = action.payload;
-            state.availableBattlefields.status = 'success'
-        },
-        chooseBattlefield: (state, action: PayloadAction&lt;string&gt;) =&gt; {
-            state.form.battlefieldId = action.payload
-        }
+    export type Stuff = {
+        id: string
+        title: string
+        type: StuffType
     }
-})
 &nbsp;
-export const gameReducer = gameSlice.reducer;
-export const gameActions = gameSlice.actions;</pre></td></tr></table></pre>
+    export type Battlefield = {
+        id: string
+        title: string
+        difficulty: number
+    }
+&nbsp;
+    export enum Role {
+        ASSAUT = "ASSAUT", // En première ligne, offensif, rapide
+        SOUTIEN = "SOUTIEN",
+        ECLAIREUR = "ECLAIREUR"
+    }
+&nbsp;
+    export type Player = {
+        id: string
+        firstname: string
+        lastname: string
+        age: number
+        role: Role
+        stuff: {
+            weapon: StuffId | null
+            gadget: StuffId | null
+            skill: StuffId | null
+        } 
+    }
+&nbsp;
+    export type Form = {
+        players: Player[],
+        teamLeaderId: string | null,
+        battlefieldId: string | null
+    }
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-20T20:45:06.428Z
+                at 2025-05-20T19:04:40.744Z
             </div>
-        <script src="../../../prettify.js"></script>
+        <script src="../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../../sorter.js"></script>
-        <script src="../../../block-navigation.js"></script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
     </body>
 </html>
     

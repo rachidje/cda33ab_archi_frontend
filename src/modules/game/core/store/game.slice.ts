@@ -8,6 +8,11 @@ export type GameState = {
         status: 'idle' | 'loading' | 'success' | 'error',
         error?: string | null
         data: GameModel.Battlefield[]
+    },
+    availableStuffs: {
+        status: 'idle' | 'loading' | 'success' | 'error',
+        error?: string | null
+        data: GameModel.Stuff[]
     }
 }
 
@@ -19,6 +24,10 @@ const initialState: GameState = {
         battlefieldId: null
     },
     availableBattlefields: {
+        status: 'idle',
+        data: []
+    },
+    availableStuffs: {
         status: 'idle',
         data: []
     }
@@ -47,6 +56,20 @@ export const gameSlice = createSlice({
         },
         chooseBattlefield: (state, action: PayloadAction<string>) => {
             state.form.battlefieldId = action.payload
+        },
+        handleLoadingStuffs: (state) => {
+            state.availableStuffs.status = 'loading'
+        },
+        handleFetchStuffsError : (state, action: PayloadAction<string>) => {
+            state.availableStuffs.status = 'error';
+            state.availableStuffs.error = action.payload
+        },
+        storeStuffs: (state, action: PayloadAction<GameModel.Stuff[]>) => {
+            state.availableStuffs.data = action.payload
+            state.availableStuffs.status = 'success'
+        },
+        chooseStuffs: (state, action: PayloadAction<GameModel.Form>) => {
+            state.form = action.payload
         }
     }
 })

@@ -10,7 +10,13 @@ export class PlayersForm {
                 id: nanoid(),
                 firstname: "John",
                 lastname: "Doe",
-                age: 30
+                age: 30,
+                role: null,
+                stuff: {
+                    weapon: null,
+                    skill: null,
+                    gadget: null
+                }
             })
         })
     }
@@ -38,7 +44,8 @@ export class PlayersForm {
         return state.teamLeaderId !== null &&
             state.players.every(player => player.age > 0) &&
             state.players.every(player => player.firstname.length > 0) &&
-            state.players.every(player => player.lastname.length > 0)
+            state.players.every(player => player.lastname.length > 0) &&
+            state.players.every(player => player.role !== null && player.role !== undefined)
     }
 
     updatePlayer<K extends keyof GameModel.Player>(

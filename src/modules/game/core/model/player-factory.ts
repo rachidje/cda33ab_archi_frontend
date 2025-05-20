@@ -7,6 +7,12 @@ export class PlayerFactory {
             firstname: "",
             lastname: "",
             age: 30,
+            role: null,
+            stuff: {
+                weapon: null,
+                gadget: null,
+                skill: null
+            },
             ...data
         }
     }

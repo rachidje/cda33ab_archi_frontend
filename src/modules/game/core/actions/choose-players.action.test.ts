@@ -8,7 +8,8 @@ describe("Choose players", () => {
         const store = createTestStore()
         const form: GameModel.Form = {
             players: [PlayerFactory.create({id: "1"})],
-            teamLeaderId: null
+            teamLeaderId: null,
+            battlefieldId: null
         }
 
         store.dispatch(choosePlayers(form));

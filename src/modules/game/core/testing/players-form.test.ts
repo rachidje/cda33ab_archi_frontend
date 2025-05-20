@@ -3,22 +3,25 @@ import { GameModel } from "../model/game.model";
 import { PlayerFactory } from "../model/player-factory";
 
 describe("PlayersForm", () => {
-    const johnDoe = PlayerFactory.create({id: "1", firstname: "John", lastname: "Doe"})
-    const janeDoe = PlayerFactory.create({id: "2", firstname: "Jane", lastname: "Doe"})
+    const johnDoe = PlayerFactory.create({id: "1", firstname: "John", lastname: "Doe",role: GameModel.Role.ASSAUT, stuff: {weapon: "1", skill: "1", gadget: "1"}})
+    const janeDoe = PlayerFactory.create({id: "2", firstname: "Jane", lastname: "Doe",role: GameModel.Role.ASSAUT, stuff: {weapon: "1", skill: "1", gadget: "1"}})
 
     const emptyState: GameModel.Form = {
         players: [],
-        teamLeaderId: null
+        teamLeaderId: null,
+        battlefieldId: null
     }
 
     const stateWithOnePlayer: GameModel.Form = {
         players: [johnDoe],
-        teamLeaderId: null
+        teamLeaderId: null,
+        battlefieldId: null
     }
 
     const stateWithTwoPlayers: GameModel.Form = {
         players: [johnDoe, janeDoe],
-        teamLeaderId: "1"
+        teamLeaderId: "1",
+        battlefieldId: null
     }
 
 
@@ -32,24 +35,23 @@ describe("PlayersForm", () => {
         it("should add a player", () => {
             const state = form.addPlayer(emptyState);
             expect(state.players).toEqual([
-                {id: expect.any(String), firstname: "John", lastname: "Doe", age: 30}
+                {id: expect.any(String), firstname: "John", lastname: "Doe", age: 30, role: null, stuff: {weapon: null, skill: null, gadget: null}}
             ])
         })
 
         it("should add a player when ther's alrrady one", () => {
             const state = form.addPlayer(stateWithOnePlayer);
             expect(state.players).toEqual([
-                {id: "1", firstname: "John", lastname: "Doe", age: 30},
-                {id: expect.any(String), firstname: "John", lastname: "Doe", age: 30}
+                johnDoe,
+                {id: expect.any(String), firstname: "John", lastname: "Doe", age: 30, role: null, stuff: {weapon: null, skill: null, gadget: null}}
             ])
         })
 
         it("should add a player when ther's alrrady two", () => {
             const state = form.addPlayer(stateWithTwoPlayers);
             expect(state.players).toEqual([
-                {id: "1", firstname: "John", lastname: "Doe", age: 30},
-                {id: "2", firstname: "Jane", lastname: "Doe", age: 30},
-                {id: expect.any(String), firstname: "John", lastname: "Doe", age: 30}
+                johnDoe, janeDoe,
+                {id: expect.any(String), firstname: "John", lastname: "Doe", age: 30, role: null, stuff: {weapon: null, skill: null, gadget: null}}
             ])
         })
     })
@@ -67,9 +69,7 @@ describe("PlayersForm", () => {
 
         it("should remove player with given id when there's two", () => {
             const state = form.removePlayer(stateWithTwoPlayers, "1")
-            expect(state.players).toEqual([
-                {id: "2", firstname: "Jane", lastname: "Doe", age: 30}
-            ])
+            expect(state.players).toEqual([janeDoe])
         })
 
         it("should set team leader id to null if I remove the team leader", () => {

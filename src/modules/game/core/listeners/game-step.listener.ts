@@ -16,4 +16,11 @@ export const registerGameStepListener = (listener: ListenerMiddlewareInstance) =
             api.dispatch(gameSlice.actions.setStep(GameModel.Step.WEAPONS))
         }
     })
+
+    listener.startListening({
+        actionCreator: gameSlice.actions.chooseStuffs,
+        effect: (_, api) => {
+            api.dispatch(gameSlice.actions.setStep(GameModel.Step.SUMMARY))
+        }
+    })
 }
