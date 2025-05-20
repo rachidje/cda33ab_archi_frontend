@@ -22,6 +22,7 @@ export namespace GameModel {
 
     export type Form = {
         players: Player[],
-        teamLeaderId: string | null
+        teamLeaderId: string | null,
+        battlefieldId: string | null
     }
 }

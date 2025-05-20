@@ -2,6 +2,6 @@
     "battlefields" : [
         {"id": "1", "title": "Zone delta", "difficulty": 5},
         {"id": "2", "title": "Brume Zone", "difficulty": 7},
-        {"id": "1", "title": "Blackforge", "difficulty": 8}
+        {"id": "3", "title": "Blackforge", "difficulty": 8}
     ]
 }

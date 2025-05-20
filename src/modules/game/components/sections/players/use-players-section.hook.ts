@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
-import { useAppDispatch } from "../../../../store/store";
+import { AppState, useAppDispatch } from "../../../../store/store";
 import { choosePlayers } from "../../../core/actions/choose-players.action";
 import { PlayersForm } from "../../../core/form/players-form";
 import { GameModel } from "../../../core/model/game.model";
+import { useSelector } from "react-redux";
 
 export const usePlayersSection = () => {
     function addPLayer() {
@@ -33,12 +34,10 @@ export const usePlayersSection = () => {
         dispatch(choosePlayers(form))
     }
 
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
+    const initialForm = useSelector((state: AppState) => state.game.form);
 
-    const [form, setForm] = useState<GameModel.Form>({
-        players: [],
-        teamLeaderId: null
-    })
+    const [form, setForm] = useState<GameModel.Form>(initialForm);
 
     const playersForm = useRef(new PlayersForm())
 

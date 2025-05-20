@@ -15,7 +15,8 @@ const initialState: GameState = {
     step: GameModel.Step.PLAYERS,
     form: {
         players: [],
-        teamLeaderId: null
+        teamLeaderId: null,
+        battlefieldId: null
     },
     availableBattlefields: {
         status: 'idle',
@@ -43,6 +44,9 @@ export const gameSlice = createSlice({
         storeBattlefields: (state, action: PayloadAction<GameModel.Battlefield[]>) => {
             state.availableBattlefields.data = action.payload;
             state.availableBattlefields.status = 'success'
+        },
+        chooseBattlefield: (state, action: PayloadAction<string>) => {
+            state.form.battlefieldId = action.payload
         }
     }
 })
