@@ -116,6 +116,22 @@ describe("StuffForm", () => {
             expect(result.players[0].stuff.weapon).toEqual(expected)
         })
 
+        it.each([
+            {playerId: playerWithAssautRole.id, stuffId: null, expected: null},
+            {playerId: playerWithAssautRole.id, stuffId: assautGadget.id, expected: assautGadget.id},
+        ])("should assign the assaut gadget to the assault player", ({playerId, stuffId, expected}) => {
+            const result = stuffForm.assignGadget(form, playerId, stuffId)
+            expect(result.players[0].stuff.gadget).toEqual(expected)
+        })
+
+        it.each([
+            {playerId: playerWithAssautRole.id, stuffId: null, expected: null},
+            {playerId: playerWithAssautRole.id, stuffId: assautSkill.id, expected: assautSkill.id},
+        ])("should assign the assaut gadget to the assault player", ({playerId, stuffId, expected}) => {
+            const result = stuffForm.assignSkill(form, playerId, stuffId)
+            expect(result.players[0].stuff.skill).toEqual(expected)
+        })
+
         it("should assign the assaut weapon fo non existing player", () => {
             const result = stuffForm.assignWeapon(form, "non-existing-player", assautWeapon.id)
             expect(result).toEqual(form)

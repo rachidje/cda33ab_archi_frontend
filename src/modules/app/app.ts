@@ -1,5 +1,5 @@
 import { ApiBattlefieldsGateway } from "../game/core/gateways/api.battlefields-gateway";
-import { InMemoryStuffsGateway } from "../game/core/gateways/in-memory.stuffs-gateway";
+import { ApiStuffsGateway } from "../game/core/gateways/api.stuffs-gateway";
 import { Dependencies } from "../store/dependencies";
 import { AppStore, createStore } from "../store/store";
 
@@ -15,7 +15,7 @@ export class App {
     setupDependencies(): Dependencies {
         return {
             battlefieldGateway: new ApiBattlefieldsGateway('http://localhost:3001'),
-            stuffsGateway: new InMemoryStuffsGateway(),
+            stuffsGateway: new ApiStuffsGateway('http://localhost:3001')
         };
     }
 }

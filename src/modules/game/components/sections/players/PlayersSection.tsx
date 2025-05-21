@@ -1,5 +1,5 @@
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel, Grid, MenuItem, TextField, Typography } from "@mui/material";
+import { Box, Button, Checkbox, FormControl, FormControlLabel, FormLabel, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import React from "react";
 import { GameModel } from "../../../core/model/game.model";
 import { usePlayersSection } from "./use-players-section.hook";
@@ -93,10 +93,9 @@ const PlayerRow: React.FC<{
                 </Grid>
                 <Grid item>
                     <FormControl>
-                        <FormLabel>Rôle</FormLabel>
-                        <TextField
-                            placeholder='Choix du role'
-                            select
+                        <InputLabel>Role</InputLabel>
+                        <Select
+                            label='Role'
                             value={role}
                             onChange={(e) => onChange(id, "role", e.target.value as GameModel.Role)}
                         >
@@ -105,7 +104,7 @@ const PlayerRow: React.FC<{
                             {roleOption}
                             </MenuItem>
                         ))}
-                        </TextField>
+                        </Select>
                     </FormControl>
                 </Grid>
                 <Grid item>

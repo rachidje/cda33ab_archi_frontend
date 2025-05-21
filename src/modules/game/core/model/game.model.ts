@@ -52,4 +52,27 @@ export namespace GameModel {
         teamLeaderId: string | null,
         battlefieldId: string | null
     }
+
+    export type SummaryStuff = {
+        id: string
+        title: string
+    }
+
+    export type Summary = {
+        battlefield: {
+            id: string
+            title: string
+        },
+        players: Array<{
+            id: string
+            firstname: string
+            lastname: string
+            isTeamLeader: boolean
+            stuff: {
+                weapon: SummaryStuff
+                gadget: SummaryStuff | null
+                skill: SummaryStuff | null
+            }
+        }>
+    }
 }
